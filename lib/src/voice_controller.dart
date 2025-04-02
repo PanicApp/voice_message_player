@@ -37,7 +37,7 @@ class VoiceController extends MyTicker {
   final Function() onPlaying;
   final Function() onPause;
   final Function(Object)? onError;
-  final double noiseWidth = 50.5.w();
+  final double noiseWidth = 65.5.w();
   late AnimationController animController;
   final AudioPlayer _player = AudioPlayer();
   final bool isFile;

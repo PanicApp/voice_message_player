@@ -18,26 +18,26 @@ class VoiceMessageView extends StatelessWidget {
       this.backgroundColor = Colors.white,
       this.activeSliderColor = Colors.red,
       this.notActiveSliderColor,
-      this.circlesColor = Colors.red,
+      this.circlesColor = Colors.grey,
       this.innerPadding = 12,
       this.cornerRadius = 20,
       // this.playerWidth = 170,
       this.size = 38,
       this.refreshIcon = const Icon(
         Icons.refresh,
-        color: Colors.white,
+        color: Colors.red,
       ),
       this.pauseIcon = const Icon(
         Icons.pause_rounded,
-        color: Colors.white,
+        color: Colors.red,
       ),
       this.playIcon = const Icon(
         Icons.play_arrow_rounded,
-        color: Colors.white,
+        color: Colors.red,
       ),
       this.stopDownloadingIcon = const Icon(
         Icons.close,
-        color: Colors.white,
+        color: Colors.red,
       ),
       this.playPauseButtonDecoration,
       this.circlesTextStyle = const TextStyle(
@@ -116,7 +116,6 @@ class VoiceMessageView extends StatelessWidget {
     );
 
     return Container(
-      width: 160 + (controller.noiseCount * .72.w()),
       padding: EdgeInsets.all(innerPadding),
       decoration: BoxDecoration(
         color: backgroundColor,
@@ -127,7 +126,7 @@ class VoiceMessageView extends StatelessWidget {
         valueListenable: controller.updater,
         builder: (context, value, child) {
           return Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             children: [
               /// play pause button
               PlayPauseButton(
@@ -141,10 +140,10 @@ class VoiceMessageView extends StatelessWidget {
                 stopDownloadingIcon: stopDownloadingIcon,
                 buttonDecoration: playPauseButtonDecoration,
               ),
-
+    
               ///
               const SizedBox(width: 10),
-
+    
               /// slider & noises
               Expanded(
                 child: Column(
@@ -152,18 +151,18 @@ class VoiceMessageView extends StatelessWidget {
                   children: [
                     const SizedBox(height: 8),
                     _noises(newTHeme),
-                    const SizedBox(height: 4),
-                    Text(controller.remindingTime, style: counterTextStyle),
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),
-
+    
               ///
               const SizedBox(width: 12),
-
+    
               /// speed button
-              _changeSpeedButton(color),
-
+              //  _changeSpeedButton(color),
+              Text(controller.remindingTime, style: counterTextStyle),
+    
               ///
               const SizedBox(width: 10),
             ],
