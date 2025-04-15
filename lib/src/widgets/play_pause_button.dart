@@ -6,18 +6,19 @@ import 'package:voice_message_package/voice_message_package.dart';
 ///
 /// This button can be used to control the playback of a media player.
 class PlayPauseButton extends StatelessWidget {
-  const PlayPauseButton(
-      {super.key,
-      required this.controller,
-      required this.color,
-      required this.size,
-      required this.playIcon,
-      required this.pauseIcon,
-      required this.refreshIcon , 
-      required this.stopDownloadingIcon ,
-      required this.loadingColor ,
-      this.buttonDecoration ,
-      });
+  const PlayPauseButton({
+    super.key,
+    required this.controller,
+    required this.color,
+    required this.size,
+    required this.playIcon,
+    required this.pauseIcon,
+    required this.refreshIcon,
+    required this.stopDownloadingIcon,
+    required this.loadingColor,
+    this.buttonDecoration,
+    this.buttonBorderColor
+  });
 
   /// The size of the button.
   final double size;
@@ -40,12 +41,13 @@ class PlayPauseButton extends StatelessWidget {
   /// The button stop Downloading Icon
   final Widget stopDownloadingIcon;
 
-  /// The button Loading Color 
-  final Color loadingColor ;
+  /// The button Loading Color
+  final Color loadingColor;
 
-  
   /// The button (container) decoration
-  final Decoration ? buttonDecoration ;
+  final Decoration? buttonDecoration;
+
+  final Color? buttonBorderColor;
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -61,7 +63,15 @@ class PlayPauseButton extends StatelessWidget {
         child: Container(
             height: size,
             width: size,
-            decoration: buttonDecoration ?? BoxDecoration(color: color, shape: BoxShape.circle) ,
+            decoration: buttonDecoration ??
+                BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: buttonBorderColor ?? const Color(0xFFE5E7EB),
+                    width: 2.0,
+                  ),
+                ),
             child: controller.isDownloading
                 ? LoadingWidget(
                     progress: controller.downloadProgress,
@@ -77,11 +87,9 @@ class PlayPauseButton extends StatelessWidget {
                 controller.isDownloadError
 
                     /// show refresh icon
-                    ?  refreshIcon
+                    ? refreshIcon
                     : controller.isPlaying
                         ? pauseIcon
-                        : playIcon
-
-            ),
+                        : playIcon),
       );
 }
