@@ -51,6 +51,8 @@ class VoiceController extends MyTicker {
   double? downloadProgress = 0;
   final int noiseCount;
 
+  bool isFileDownloaded = false;
+
   /// Gets the current playback position of the voice.
   double get currentMillSeconds {
     final c = currentDuration.inMilliseconds.toDouble();
@@ -295,6 +297,9 @@ class VoiceController extends MyTicker {
 
   ///
   String get remindingTime {
+    if (!isFileDownloaded) {
+      return '--:--';
+    }
     if (currentDuration == Duration.zero) {
       return maxDuration.formattedTime;
     }
@@ -317,6 +322,8 @@ class VoiceController extends MyTicker {
         this.maxDuration = maxDuration;
         animController.duration = maxDuration;
       }
+      isFileDownloaded = true;
+      _updateUi();
     } catch (err) {
       if (kDebugMode) {
         ///
