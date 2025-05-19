@@ -49,7 +49,7 @@ class VoiceMessageView extends StatelessWidget {
         fontSize: 11,
         fontWeight: FontWeight.w500,
       ),
-      this.playPauseButtonLoadingColor = Colors.white, this.playPauseButtonBorderColor})
+      this.playPauseButtonLoadingColor = Colors.white, this.playPauseButtonBorderColor, this.noiseWidth})
       : super(key: key);
 
   /// The controller for the voice message view.
@@ -102,6 +102,9 @@ class VoiceMessageView extends StatelessWidget {
 
   final Color? playPauseButtonBorderColor;
 
+
+  final double? noiseWidth;
+
   @override
 
   /// Build voice message view.
@@ -153,7 +156,7 @@ class VoiceMessageView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
-                    _noises(newTHeme),
+                    _noises(newTHeme:newTHeme,noiseWidth:noiseWidth),
                     const SizedBox(height: 8),
                   ],
                 ),
@@ -175,7 +178,7 @@ class VoiceMessageView extends StatelessWidget {
     );
   }
 
-  SizedBox _noises(ThemeData newTHeme) => SizedBox(
+  SizedBox _noises({required ThemeData newTHeme, double?  noiseWidth}) => SizedBox(
         height: 30,
         width: controller.noiseWidth,
         child: Stack(
@@ -185,6 +188,7 @@ class VoiceMessageView extends StatelessWidget {
             Noises(
               rList: controller.randoms!,
               activeSliderColor: activeSliderColor,
+              noiseWidth: noiseWidth,
             ),
 
             /// slider
